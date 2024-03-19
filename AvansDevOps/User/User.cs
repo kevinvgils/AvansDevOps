@@ -1,5 +1,5 @@
-﻿namespace User {
-    public class User {
+﻿namespace AvansDevOps {
+    public class Class1 {
 
     }
 }
