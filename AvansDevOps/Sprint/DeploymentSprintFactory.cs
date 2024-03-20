@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AvansDevOps.Sprint {
-    public class ReviewSprintFactory : ISprintFactory {
+    public class DeploymentSprintFactory : ISprintFactory {
         public Sprint CreateSprint() {
-            return new ReviewSprint();
+            return new DeploymentSprint();
         }
     }
 }

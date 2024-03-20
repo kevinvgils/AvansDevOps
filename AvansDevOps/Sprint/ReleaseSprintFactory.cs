@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 namespace AvansDevOps.Sprint {
     public class ReleaseSprintFactory : ISprintFactory {
         public Sprint CreateSprint() {
-            var newSprint = new ReleaseSprint();
-            return newSprint;
+            return new ReleaseSprint();
         }
     }
 }
