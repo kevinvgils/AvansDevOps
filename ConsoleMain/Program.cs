@@ -23,7 +23,9 @@ notificationManager.Notify("Hallo dit is het bericht");
 
 
 // SPRINT FACTORY
-Project project = new Project();
+var productowner = new User();
+productowner.setRole(new ProductOwner());
+Project project = new Project(productowner);
 
 // Create and add release sprints
 project.CreateSprint(new ReleaseSprintFactory());
