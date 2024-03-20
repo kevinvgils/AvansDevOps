@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AvansDevOps.Export;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,12 @@ namespace AvansDevOps.Report {
         public ReportDecorator(IReport report) {
             _report = report;
         }
+
+        public virtual void Export(IExportStrategy exportStrategy, string fileName) {
+            var reportcontent = generate();
+            exportStrategy.Export(reportcontent, fileName);
+        }
+
         public virtual string generate() {
             return _report.generate();
         }

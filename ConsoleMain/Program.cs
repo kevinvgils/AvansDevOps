@@ -1,4 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using AvansDevOps.Export;
 using AvansDevOps.Notification;
 using AvansDevOps.Report;
 using AvansDevOps.ScrumRole;
@@ -38,12 +39,22 @@ foreach (var sprint in project.sprints) {
 }
 
 //DECORATOR REPORT
-var basereport = new BaseReport();
+IReport basereport = new BaseReport();
 Console.WriteLine("Generating Base report:");
 Console.WriteLine(basereport.generate());
 Console.WriteLine("Generating decorated:");
 FooterDecorator footer = new(basereport);
-HeaderDecorator header = new(footer);
-Console.WriteLine(header.generate());
+HeaderDecorator headerandfooter = new(footer);
+Console.WriteLine(headerandfooter.generate());
+
+// EXPORT STRATEGY
+IReport report = new BaseReport();
+report.Export(new PNGStrategy(), "report.png");
+
+report = new HeaderDecorator(report);
+report = new FooterDecorator(report);
+
+// Export to PDF
+report.Export(new PDFStrategy(), "reportDecorated.pdf");
 
 
