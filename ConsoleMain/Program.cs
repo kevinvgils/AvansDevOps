@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using AvansDevOps.Notification;
+using AvansDevOps.Report;
 using AvansDevOps.ScrumRole;
 using AvansDevOps.Sprint;
 
@@ -25,18 +26,24 @@ notificationManager.Notify("Hallo dit is het bericht");
 // SPRINT FACTORY
 var productowner = new User();
 productowner.setRole(new ProductOwner());
-Project project = new Project(productowner);
+Project project = new(productowner);
 
-// Create and add release sprints
 project.CreateSprint(new ReleaseSprintFactory());
 
-// Create and add backlog sprints
 project.CreateSprint(new ReviewSprintFactory());
 
-// Display the list of sprints in the project
 Console.WriteLine("List of Sprints in the Project:");
 foreach (var sprint in project.sprints) {
     sprint.start();
 }
+
+//DECORATOR REPORT
+var basereport = new BaseReport();
+Console.WriteLine("Generating Base report:");
+Console.WriteLine(basereport.generate());
+Console.WriteLine("Generating decorated:");
+FooterDecorator footer = new(basereport);
+HeaderDecorator header = new(footer);
+Console.WriteLine(header.generate());
 
 
