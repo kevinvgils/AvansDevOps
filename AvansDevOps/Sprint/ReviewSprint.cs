@@ -9,14 +9,6 @@ namespace AvansDevOps.Sprint {
     public class ReviewSprint : Sprint {
         public List<User> Members { get; } = new List<User>();
 
-        public override void addMember(User member) {
-            Members.Add(member);
-        }
-
-        public override void removeMember(User member) {
-            Members.Remove(member);
-        }
-
         public override void end() {
             throw new NotImplementedException();
         }

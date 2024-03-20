@@ -14,7 +14,11 @@ namespace AvansDevOps.Sprint {
 
         public abstract void setStatus();
 
-        public abstract void addMember(User member);
-        public abstract void removeMember(User member);
+        public void addMember(User member) {
+            Members.Add(member);
+        }
+        public void removeMember(User member) {
+            Members.Remove(member);
+        }
     }
 }
