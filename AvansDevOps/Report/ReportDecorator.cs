@@ -13,7 +13,7 @@ namespace AvansDevOps.Report {
             _report = report;
         }
 
-        public virtual void Export(IExportStrategy exportStrategy, string fileName) {
+        public void Export(IExportStrategy exportStrategy, string fileName) {
             var reportcontent = generate();
             exportStrategy.Export(reportcontent, fileName);
         }
