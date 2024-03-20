@@ -1,7 +1,10 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using AvansDevOps.Notification;
 using AvansDevOps.ScrumRole;
+using AvansDevOps.Sprint;
 
+
+// NOTIFICATIONS TEST EN USER ROLES
 var notificationManager = new NotificationManager();
 
 var user1 = new User();
@@ -17,5 +20,21 @@ notificationManager.Attach(user1, slack);
 notificationManager.Attach(user2, email);
 
 notificationManager.Notify("Hallo dit is het bericht");
+
+
+// SPRINT FACTORY
+Project project = new Project();
+
+// Create and add release sprints
+project.CreateSprint(new ReleaseSprintFactory());
+
+// Create and add backlog sprints
+project.CreateSprint(new ReviewSprintFactory());
+
+// Display the list of sprints in the project
+Console.WriteLine("List of Sprints in the Project:");
+foreach (var sprint in project.sprints) {
+    sprint.start();
+}
 
 
