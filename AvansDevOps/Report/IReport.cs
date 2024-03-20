@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AvansDevOps.Report {
-    public abstract class Report {
-        public abstract string generate();
+    public interface IReport {
+        public string generate();
     }
 }

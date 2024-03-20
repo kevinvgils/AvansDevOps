@@ -5,18 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AvansDevOps.Report {
-    public abstract class ReportDecorator : Report {
-        protected Report _report;
+    public abstract class ReportDecorator : IReport {
+        protected IReport _report;
 
-        public ReportDecorator(Report report) {
+        public ReportDecorator(IReport report) {
             _report = report;
         }
-        public override string generate() {
-            if (this._report != null) {
-                return this._report.generate();
-            } else {
-                return string.Empty;
-            }
+        public virtual string generate() {
+            return _report.generate();
         }
     }
 }

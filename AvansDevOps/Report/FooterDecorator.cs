@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.Report {
     public class FooterDecorator : ReportDecorator {
-        public FooterDecorator(Report report) : base(report) {
+        public FooterDecorator(IReport report) : base(report) {
         }
 
         public override string generate() {
-            return $"FooterDecorator({base.generate()})";
+            return base.generate() + "\nFooter";
         }
     }
 }

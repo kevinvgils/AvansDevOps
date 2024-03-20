@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.Report {
     public class HeaderDecorator : ReportDecorator {
-        public HeaderDecorator(Report report) : base(report) {
+        public HeaderDecorator(IReport report) : base(report) {
         }
 
         public override string generate() {
-            return $"HeaderDecorator({base.generate()})";
+            return "Header\n" + base.generate();
         }
     }
 }

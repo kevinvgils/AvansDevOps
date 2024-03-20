@@ -5,7 +5,7 @@ using AvansDevOps.ScrumRole;
 using AvansDevOps.Sprint;
 
 
-// NOTIFICATIONS TEST EN USER ROLES
+// NOTIFICATIONS OBSERVER & USER STRATEGY PATTERN
 var notificationManager = new NotificationManager();
 
 var user1 = new User();
