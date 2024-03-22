@@ -1,4 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using AvansDevOps.Backlog;
 using AvansDevOps.Export;
 using AvansDevOps.Notification;
 using AvansDevOps.Report;
@@ -56,5 +57,19 @@ report = new FooterDecorator(report);
 
 // Export to PDF
 report.Export(new PDFStrategy(), "reportDecorated.pdf");
+
+
+//BACKLOGITEMS
+BacklogItem context = new BacklogItem();
+
+// Sample workflow
+context.HandleDoing();
+context.HandleReadyForTesting();
+context.HandleTesting();
+context.HandleTested();
+context.HandleDone();
+
+// Trying to perform invalid state transition
+context.HandleTesting();
 
 
