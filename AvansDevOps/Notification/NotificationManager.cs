@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.Notification {
     public class NotificationManager : INotificationManager {
-        private Dictionary<User, INotificationObserver> _observers = new Dictionary<User, INotificationObserver>(); 
+        private readonly Dictionary<User, INotificationObserver> _observers = new Dictionary<User, INotificationObserver>(); 
         public void Attach(User user, INotificationObserver observer) {
             _observers.Add(user, observer);
         }
@@ -17,9 +17,9 @@ namespace AvansDevOps.Notification {
         }
 
         public void Notify(string message) {
-            foreach (var observers in _observers) {
-                var observer = observers.Value;
-                observer.Update(message);
+            
+            foreach (var observers in _observers.Select(observers => observers.Value)) {
+                observers.Update(message);
             }
         }
     }

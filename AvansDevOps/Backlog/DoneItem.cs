@@ -7,28 +7,29 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.Backlog {
     public class DoneItem : BacklogState {
+        public string message = "Already done. Create a new item";
         public override void HandleDoing(BacklogItem context) {
-            Console.WriteLine("Already done. Create new item");
+            Console.WriteLine(message);
         }
 
         public override void HandleDone(BacklogItem context) {
-            Console.WriteLine("Already done. Create new item");
+            Console.WriteLine(message);
         }
 
         public override void HandleReadyForTesting(BacklogItem context) {
-            Console.WriteLine("Already done. Create new item");
+            Console.WriteLine(message);
         }
 
         public override void HandleTested(BacklogItem context) {
-            Console.WriteLine("Already done. Create new item");
+            Console.WriteLine(message);
         }
 
         public override void HandleTesting(BacklogItem context) {
-            Console.WriteLine("Already done. Create new item");
+            Console.WriteLine(message);
         }
 
         public override void HandleToDo(BacklogItem context) {
-            Console.WriteLine("Already done. Create new item");
+            Console.WriteLine(message);
         }
     }
 }

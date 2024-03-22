@@ -9,7 +9,7 @@ namespace AvansDevOps.Report {
     public abstract class ReportDecorator : IReport {
         protected IReport _report;
 
-        public ReportDecorator(IReport report) {
+        protected ReportDecorator(IReport report) {
             _report = report;
         }
 

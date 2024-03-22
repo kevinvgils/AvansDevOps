@@ -11,7 +11,6 @@ namespace AvansDevOps.Backlog {
             Console.WriteLine("Not allowed move to ToDo");
         }
         public override void HandleDone(BacklogItem context) {
-            //TODO MAKE ONLY DEVELOPER BE ABLE TO DO IT
             Console.WriteLine("FIRST MOVE TO TESTED");
         }
 

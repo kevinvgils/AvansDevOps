@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.Sprint {
     public class Project {
-        public List<Sprint> sprints = new List<Sprint>();
-        public User productOwner;
+        private List<Sprint> sprints = new();
+        private User productOwner;
 
         public Project(User productOwner) {
             this.productOwner = productOwner;
@@ -17,5 +17,9 @@ namespace AvansDevOps.Sprint {
             Sprint sprint = sprintFactory.CreateSprint();
             sprints.Add(sprint);
         }
+
+        public User GetUser() { return productOwner; }
+        public void SetUser(User user) { productOwner = user; }
+        public List<Sprint> GetSprints() { return sprints; }
     }
 }

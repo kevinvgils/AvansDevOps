@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AvansDevOps.Export {
-    public class PDFStrategy : IExportStrategy {
+    public class PdfStrategy : IExportStrategy {
         public void Export(string reportContent, string fileName) {
             Console.WriteLine($"Exporting report to PDF: {fileName}");
             Console.WriteLine($"PDF:{reportContent}");

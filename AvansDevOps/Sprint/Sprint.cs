@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.Sprint {
     public abstract class Sprint {
-        public List<User> Members { get; }
+        public List<User> Members { get; } = new List<User>();
         public abstract void start();
 
         public abstract void end();

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AvansDevOps.Export {
-    public class PNGStrategy : IExportStrategy {
+    public class PngStrategy : IExportStrategy {
         public void Export(string reportContent, string fileName) {
             Console.WriteLine($"Exporting report to PNG: {fileName}");
             Console.WriteLine($"PNG:{reportContent}");

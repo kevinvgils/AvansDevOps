@@ -56,7 +56,7 @@ report = new HeaderDecorator(report);
 report = new FooterDecorator(report);
 
 // Export to PDF
-report.Export(new PDFStrategy(), "reportDecorated.pdf");
+report.Export(new PdfStrategy(), "reportDecorated.pdf");
 
 
 //BACKLOGITEMS

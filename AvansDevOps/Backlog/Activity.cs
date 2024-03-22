@@ -11,6 +11,10 @@ namespace AvansDevOps.Backlog {
         private string Name { get; set; }
         private User? Developer { get; set; }
 
+        public Activity(string name) { 
+            Name = name;
+        }
+
         public void Remove() {
             Developer = null;
         }
@@ -19,7 +23,7 @@ namespace AvansDevOps.Backlog {
             Developer = developer;
         }
 
-        public User GetDeveloper() {
+        public User? GetDeveloper() {
             return Developer;
         }
 

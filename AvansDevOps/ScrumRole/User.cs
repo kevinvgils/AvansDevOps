@@ -1,13 +1,21 @@
 ﻿
 namespace AvansDevOps.ScrumRole {
     public class User {
-        public IScrumRole role;
+        private IScrumRole role;
 
-        public void setRole(IScrumRole role) {
+        public User(IScrumRole role) {
             this.role = role;
         }
 
-        public void performRole() {
+        public void SetRole(IScrumRole role) {
+            this.role = role;
+        }
+
+        public IScrumRole GetRole() {
+            return role;
+        }
+
+        public void PerformRole() {
             role.execute();
         }
     }
