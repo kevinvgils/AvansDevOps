@@ -3,7 +3,7 @@
 namespace AvansDevOps.Backlog {
     public class BacklogItem {
         private User? Developer { get; set; }
-        private List<Activity> activities = new();
+        private readonly List<Activity> activities = new();
         private BacklogState _state { get; set; }
 
         public BacklogItem() {
@@ -20,6 +20,10 @@ namespace AvansDevOps.Backlog {
 
         public void RemoveActivity(Activity activity) {
             activities.Remove(activity);
+        }
+
+        public List<Activity> GetActivities() {
+            return activities;
         }
 
         public void UpdateActivity(bool status, Activity activity) {
@@ -54,7 +58,7 @@ namespace AvansDevOps.Backlog {
             _state.HandleDone(this);
         }
 
-        public static void NotifyTesters() {
+        public void NotifyTesters() {
             Console.WriteLine("Notifying testers...");
             // Implementation of notification logic
         }
