@@ -10,11 +10,8 @@ using AvansDevOps.Sprint;
 // NOTIFICATIONS OBSERVER & USER STRATEGY PATTERN
 var notificationManager = new NotificationManager();
 
-var user1 = new User();
-var user2 = new User();
-
-user1.setRole(new Developer());
-user2.setRole(new Scrummaster());
+var user1 = new User(new Developer());
+var user2 = new User(new Scrummaster());
 
 var slack = new SlackObserver();
 var email = new EmailObserver();
@@ -26,8 +23,7 @@ notificationManager.Notify("Hallo dit is het bericht");
 
 
 // SPRINT FACTORY
-var productowner = new User();
-productowner.setRole(new ProductOwner());
+var productowner = new User(new ProductOwner());
 Project project = new(productowner);
 
 project.CreateSprint(new ReleaseSprintFactory());
@@ -35,7 +31,7 @@ project.CreateSprint(new ReleaseSprintFactory());
 project.CreateSprint(new ReviewSprintFactory());
 
 Console.WriteLine("List of Sprints in the Project:");
-foreach (var sprint in project.sprints) {
+foreach (var sprint in project.GetSprints()) {
     sprint.start();
 }
 
@@ -50,7 +46,7 @@ Console.WriteLine(headerandfooter.generate());
 
 // EXPORT STRATEGY
 IReport report = new BaseReport();
-report.Export(new PNGStrategy(), "report.png");
+report.Export(new PngStrategy(), "report.png");
 
 report = new HeaderDecorator(report);
 report = new FooterDecorator(report);
