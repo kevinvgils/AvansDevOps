@@ -1,10 +1,30 @@
 using AvansDevOps.Backlog;
+using AvansDevOps.Notification;
 using AvansDevOps.ScrumRole;
 using AvansDevOps.Sprint;
+using Moq;
 
 namespace AvansDevOps.Tests {
     [TestFixture]
     public class BacklogItemsTests {
+        private StringWriter sw;
+        private TextWriter originalOutput;
+
+        [SetUp]
+        public void RedirectConsoleOutput() {
+            // Redirect console output
+            sw = new StringWriter();
+            originalOutput = Console.Out;
+            Console.SetOut(sw);
+        }
+
+        [TearDown]
+        public void RestoreConsoleOutput() {
+            // Restore original console output
+            Console.SetOut(originalOutput);
+            sw.Dispose();
+        }
+
         [Test]
         public void US1_1AddBacklogItem_ShouldIncreaseBacklogCount() {
             // Arrange
@@ -75,6 +95,61 @@ namespace AvansDevOps.Tests {
             // Assert
             Assert.That(sprint.BacklogItems[0].GetActivities().Count, Is.EqualTo(1));
             Assert.That(activities[0].GetName(), Is.EqualTo("Test activity"));
+        }
+
+        [Test]
+        public void NotifyDeveloper_Test() {
+            // Arrange
+            User productowner = new(new ProductOwner());
+            User developer = new(new Developer());
+            Project project = new(productowner);
+            project.CreateSprint(new ReviewSprintFactory(), "ReviewSprint1");
+            var channelsMock = new List<INotificationObserver> {
+                new SlackObserver()
+            };
+            var backlogItem = new BacklogItem(1, "Sample Backlog Item", project.GetSprint());
+
+
+            backlogItem.SetDeveloper(developer, channelsMock);
+
+            // Act
+            backlogItem.HandleDoing();
+            backlogItem.HandleReadyForTesting();
+            backlogItem.HandleTesting();
+            backlogItem.HandleToDo();
+            // Assert
+            string[] consoleOutputLines = sw.ToString().Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            string lastLine = consoleOutputLines[consoleOutputLines.Length - 1];
+            Assert.That(lastLine, Is.EqualTo("Sending Slack message: Moved back to ToDo. Didn't meet Definition of Done in testing"));
+        }
+
+        [Test]
+        public void NotifyTesters_Test() {
+            // Arrange
+            User productowner = new(new ProductOwner());
+            User developer = new(new Developer());
+            User tester1 = new(new Tester());
+            User tester2 = new(new Tester());
+
+            Project project = new(productowner);
+            project.CreateSprint(new ReviewSprintFactory(), "ReviewSprint1");
+            var channelsMock = new List<INotificationObserver> {
+                new SlackObserver()
+            };
+            var backlogItem = new BacklogItem(1, "Sample Backlog Item", project.GetSprint());
+
+            var sprint = project.GetSprint();
+            sprint.AddTester(tester1, channelsMock);
+            sprint.AddTester(tester2, channelsMock);
+            backlogItem.SetDeveloper(developer, channelsMock);
+
+            // Act
+            backlogItem.HandleDoing();
+            backlogItem.HandleReadyForTesting();
+            // Assert
+            string[] consoleOutputLines = sw.ToString().Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            string lastLine = consoleOutputLines[consoleOutputLines.Length - 1];
+            Assert.That(lastLine, Is.EqualTo("Sending Slack message: Sample Backlog Itemis ready for testing"));
         }
     }
 }
