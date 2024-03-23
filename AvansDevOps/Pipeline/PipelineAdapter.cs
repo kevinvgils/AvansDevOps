@@ -15,27 +15,27 @@ namespace AvansDevOps.Pipeline {
         }
 
         public void DeployToAzure() {
-            Console.WriteLine($"'{_adaptee.ExecuteRequest}' Deploy to azure");
+            Console.WriteLine($"'{_adaptee.ExecuteRequest()}' Deploy to azure");
         }
 
         public void ExecuteTests() {
-            Console.WriteLine($"'{_adaptee.ExecuteRequest}' Execute Tests");
+            Console.WriteLine($"'{_adaptee.ExecuteRequest()}' Execute Tests");
         }
 
         public void InstallPackages() {
-            Console.WriteLine($"'{_adaptee.ExecuteRequest}' Install Packages");
+            Console.WriteLine($"'{_adaptee.ExecuteRequest()}' Install Packages");
         }
 
         public void PerformUtilityActions() {
-            Console.WriteLine($"'{_adaptee.ExecuteRequest}' Perform UtilityActions");
+            Console.WriteLine($"'{_adaptee.ExecuteRequest()}' Perform UtilityActions");
         }
 
         public void RetrieveSourceCode() {
-            Console.WriteLine($"'{_adaptee.ExecuteRequest}' Retrieve Source Code");
+            Console.WriteLine($"'{_adaptee.ExecuteRequest()}' Retrieve Source Code");
         }
 
         public void RunCodeAnalysis() {
-            Console.WriteLine($"'{_adaptee.ExecuteRequest}' Run Code Analysis");
+            Console.WriteLine($"'{_adaptee.ExecuteRequest()}' Run Code Analysis");
         }
     }
 }
