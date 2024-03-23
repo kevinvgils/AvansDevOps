@@ -41,25 +41,25 @@ foreach (var sprint in project.GetSprints()) {
     sprint.StartSprint();
     sprint.EndSprint();
 }
-
+var sprintr = project.GetSprint();
 //DECORATOR REPORT
 IReport basereport = new BaseReport();
 Console.WriteLine("Generating Base report:");
-Console.WriteLine(basereport.generate());
+Console.WriteLine(basereport.generate(sprintr));
 Console.WriteLine("Generating decorated:");
 FooterDecorator footer = new(basereport);
 HeaderDecorator headerandfooter = new(footer);
-Console.WriteLine(headerandfooter.generate());
+Console.WriteLine(headerandfooter.generate(sprintr));
 
 // EXPORT STRATEGY
 IReport report = new BaseReport();
-report.Export(new PngStrategy(), "report.png");
+report.Export(new PngStrategy(), "report.png", sprintr);
 
 report = new HeaderDecorator(report);
 report = new FooterDecorator(report);
 
 // Export to PDF
-report.Export(new PdfStrategy(), "reportDecorated.pdf");
+report.Export(new PdfStrategy(), "reportDecorated.pdf", sprintr);
 
 
 //BACKLOGITEMS

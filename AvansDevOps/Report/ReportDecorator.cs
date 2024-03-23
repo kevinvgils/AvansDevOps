@@ -13,13 +13,13 @@ namespace AvansDevOps.Report {
             _report = report;
         }
 
-        public void Export(IExportStrategy exportStrategy, string fileName) {
-            var reportcontent = generate();
+        public void Export(IExportStrategy exportStrategy, string fileName, Sprint.Sprint sprint) {
+            var reportcontent = generate(sprint);
             exportStrategy.Export(reportcontent, fileName);
         }
 
-        public virtual string generate() {
-            return _report.generate();
+        public virtual string generate(Sprint.Sprint sprint) {
+            return _report.generate(sprint);
         }
     }
 }

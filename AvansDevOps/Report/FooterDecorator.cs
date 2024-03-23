@@ -9,8 +9,8 @@ namespace AvansDevOps.Report {
         public FooterDecorator(IReport report) : base(report) {
         }
 
-        public override string generate() {
-            return base.generate() + "\nFooter";
+        public override string generate(Sprint.Sprint sprint) {
+            return base.generate(sprint) + "\nFooter";
         }
     }
 }

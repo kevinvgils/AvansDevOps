@@ -10,8 +10,8 @@ namespace AvansDevOps.Report {
         public HeaderDecorator(IReport report) : base(report) {
         }
 
-        public override string generate() {
-            return "Header\n" + base.generate();
+        public override string generate(Sprint.Sprint sprint) {
+            return "Header\n" + base.generate(sprint);
         }
     }
 }
