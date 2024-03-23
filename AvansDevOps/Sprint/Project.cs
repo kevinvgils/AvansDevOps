@@ -13,8 +13,8 @@ namespace AvansDevOps.Sprint {
         public Project(User productOwner) {
             this.productOwner = productOwner;
         }
-        public void CreateSprint(ISprintFactory sprintFactory) {
-            Sprint sprint = sprintFactory.CreateSprint();
+        public void CreateSprint(ISprintFactory sprintFactory, string sprintName) {
+            Sprint sprint = sprintFactory.CreateSprint(sprintName);
             sprints.Add(sprint);
         }
 

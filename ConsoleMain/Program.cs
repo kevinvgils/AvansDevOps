@@ -26,13 +26,15 @@ notificationManager.Notify("Hallo dit is het bericht");
 var productowner = new User(new ProductOwner());
 Project project = new(productowner);
 
-project.CreateSprint(new ReleaseSprintFactory());
+project.CreateSprint(new DeploymentSprintFactory(), "DeploymentSprint1");
 
-project.CreateSprint(new ReviewSprintFactory());
+project.CreateSprint(new ReviewSprintFactory(), "ReviewSprint1");
 
 Console.WriteLine("List of Sprints in the Project:");
 foreach (var sprint in project.GetSprints()) {
-    sprint.start();
+    sprint.EndSprint();
+    sprint.StartSprint();
+    sprint.EndSprint();
 }
 
 //DECORATOR REPORT

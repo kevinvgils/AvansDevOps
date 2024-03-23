@@ -7,17 +7,12 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.Sprint {
     public class ReviewSprint : Sprint {
-
-        public override void end() {
-            throw new NotImplementedException();
+        public ReviewSprint(string name) : base(name) {
+            Name = name;
         }
 
-        public override void setStatus() {
-            throw new NotImplementedException();
-        }
-
-        public override void start() {
-           Console.WriteLine("Review Sprint Started");
+        public override void SprintEnded() {
+            Console.WriteLine("Sprint ended. Starting Review....");
         }
     }
 }

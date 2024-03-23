@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.Sprint {
     public class ReviewSprintFactory : ISprintFactory {
-        public Sprint CreateSprint() {
-            return new ReviewSprint();
+        public Sprint CreateSprint(string name) {
+            return new ReviewSprint(name);
         }
     }
 }
