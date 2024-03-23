@@ -4,7 +4,8 @@ using AvansDevOps.Sprint.SprintState;
 
 namespace AvansDevOps.Sprint {
     public abstract class Sprint {
-        public List<User> Members { get; } = new List<User>();
+        public List<User> Developers { get; } = new();
+        public Scrummaster? Scrummaster { get; set; }
         public List<BacklogItem> BacklogItems { get; } = new();
         public string Name { get; set; }
         private MainState State { get; set; }
@@ -18,11 +19,14 @@ namespace AvansDevOps.Sprint {
 
         public abstract void SprintEnded();
 
-        public void addMember(User member) {
-            Members.Add(member);
+        public void AddMember(User member) {
+            Developers.Add(member);
         }
-        public void removeMember(User member) {
-            Members.Remove(member);
+        public void RemoveMember(User member) {
+            Developers.Remove(member);
+        }
+        public void SetScrummaster(Scrummaster scrummaster) {
+            Scrummaster = scrummaster;
         }
         public void ChangeSprintName(string name) {
             State.ChangeSprintName(this, name);
