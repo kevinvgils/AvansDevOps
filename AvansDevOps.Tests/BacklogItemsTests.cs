@@ -158,5 +158,37 @@ namespace AvansDevOps.Tests {
             string lastLine = consoleOutputLines[consoleOutputLines.Length - 4];
             Assert.That(lastLine, Is.EqualTo("Sending Slack message: Sample Backlog Itemis ready for testing"));
         }
+
+        [Test]
+        public void HandleDoneBacklogItem() {
+            // Arrange
+            User productowner = new(new ProductOwner());
+            User developer = new(new Developer());
+            Project project = new(productowner);
+            project.CreateSprint(new ReviewSprintFactory(), "ReviewSprint1");
+            var channelsMock = new List<INotificationObserver> {
+                new SlackObserver()
+            };
+            var backlogItem = new BacklogItem(1, "Sample Backlog Item", project.GetSprint());
+
+
+            backlogItem.SetDeveloper(developer, channelsMock);
+
+            // Act
+            backlogItem.HandleDoing();
+            backlogItem.HandleReadyForTesting();
+            backlogItem.HandleTesting();
+            backlogItem.HandleTested();
+            backlogItem.HandleDone();
+            backlogItem.HandleReadyForTesting();
+            // Assert
+            string[] consoleOutputLines = sw.ToString().Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            string lastLine = consoleOutputLines[consoleOutputLines.Length - 1];
+            string doneLine = consoleOutputLines[consoleOutputLines.Length - 2];
+            Assert.Multiple(() => {
+                Assert.That(lastLine, Is.EqualTo("Already done. Create a new item"));
+                Assert.That(doneLine, Is.EqualTo("Moving to Done..."));
+            });
+        }
     }
 }

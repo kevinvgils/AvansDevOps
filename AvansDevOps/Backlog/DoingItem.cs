@@ -19,7 +19,7 @@ namespace AvansDevOps.Backlog {
         }
 
         public override void HandleReadyForTesting(BacklogItem context, Sprint.Sprint sprint) {
-            if (context.GetActivities().Exists(activity => !activity.GetStatus())) throw new Exception("Some activities are not done yet. Finish them first");
+            if (context.GetActivities().Exists(activity => !activity.GetStatus())) throw new ArgumentException("Some activities are not done yet. Finish them first");
             Console.WriteLine("Moving to ReadyForTesting...");
             context.SetState(new ReadyForTestingItem());
             sprint.NotifyTesters(context);
