@@ -16,7 +16,7 @@ namespace AvansDevOps.Backlog {
             Console.WriteLine(message);
         }
 
-        public override void HandleReadyForTesting(BacklogItem context) {
+        public override void HandleReadyForTesting(BacklogItem context, Sprint.Sprint sprint) {
             Console.WriteLine(message);
         }
 

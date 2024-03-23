@@ -1,4 +1,5 @@
 ﻿using AvansDevOps.Backlog;
+using AvansDevOps.Notification;
 using AvansDevOps.ScrumRole;
 using AvansDevOps.Sprint;
 using NUnit.Framework;
@@ -18,12 +19,12 @@ namespace AvansDevOps.Tests {
             Project project = new(productowner);
             DateOnly startDate = new DateOnly(2024, 3, 23);
             DateOnly endDate = new DateOnly(2024, 4, 12);
-            BacklogItem item1 = new(5, "test item");
 
 
             //Act
             project.CreateSprint(new ReviewSprintFactory(), "ReviewSprint1");
             var sprint = project.GetSprint();
+            BacklogItem item1 = new(5, "test item", sprint);
             sprint.SetStartAndEndDate(startDate, endDate);
             sprint.AddBacklogItems(item1);
 
@@ -41,15 +42,19 @@ namespace AvansDevOps.Tests {
             Project project = new(productowner);
             DateOnly startDate = new DateOnly(2024, 3, 23);
             DateOnly endDate = new DateOnly(2024, 4, 12);
-            BacklogItem item1 = new(5, "test item");
             User developer1 = new(new Developer());
             User tester1 = new(new Tester());
             User scrumm = new(new Scrummaster());
+            var list = new List<INotificationObserver> {
+                new SlackObserver(),
+                new EmailObserver()
+            };
 
 
             //Act
             project.CreateSprint(new ReviewSprintFactory(), "ReviewSprint1");
             var sprint = project.GetSprint();
+            BacklogItem item1 = new(5, "test item", sprint);
             sprint.StartSprint();
             TestDelegate testDelegate = () => sprint.SetStartAndEndDate(startDate, endDate);
             TestDelegate testDelegate2 = () => sprint.AddBacklogItems(item1);
@@ -57,7 +62,7 @@ namespace AvansDevOps.Tests {
             TestDelegate testDelegate4 = () => sprint.ChangeSprintName("Test");
             TestDelegate testDelegate5 = () => sprint.AddMember(developer1);
             TestDelegate testDelegate6 = () => sprint.RemoveMember(developer1);
-            TestDelegate testDelegate7 = () => sprint.AddTester(tester1);
+            TestDelegate testDelegate7 = () => sprint.AddTester(tester1, list);
             TestDelegate testDelegate8 = () => sprint.RemoveTester(tester1);
             TestDelegate testDelegate9 = () => sprint.SetScrummaster(scrumm);
 
@@ -80,15 +85,19 @@ namespace AvansDevOps.Tests {
             Project project = new(productowner);
             DateOnly startDate = new DateOnly(2024, 3, 23);
             DateOnly endDate = new DateOnly(2024, 4, 12);
-            BacklogItem item1 = new(5, "test item");
             User developer1 = new(new Developer());
             User tester1 = new(new Tester());
             User scrumm = new(new Scrummaster());
+            var list = new List<INotificationObserver> {
+                new SlackObserver(),
+                new EmailObserver()
+            };
 
 
             //Act
             project.CreateSprint(new ReviewSprintFactory(), "ReviewSprint1");
             var sprint = project.GetSprint();
+            BacklogItem item1 = new(5, "test item", sprint);
             sprint.StartSprint();
             sprint.EndSprint();
             TestDelegate testDelegate = () => sprint.SetStartAndEndDate(startDate, endDate);
@@ -98,7 +107,7 @@ namespace AvansDevOps.Tests {
             TestDelegate testDelegate5 = () => sprint.ChangeSprintName("Test");
             TestDelegate testDelegate6 = () => sprint.AddMember(developer1);
             TestDelegate testDelegate7 = () => sprint.RemoveMember(developer1);
-            TestDelegate testDelegate8 = () => sprint.AddTester(tester1);
+            TestDelegate testDelegate8 = () => sprint.AddTester(tester1, list);
             TestDelegate testDelegate9 = () => sprint.RemoveTester(tester1);
             TestDelegate testDelegate10 = () => sprint.SetScrummaster(scrumm);
 

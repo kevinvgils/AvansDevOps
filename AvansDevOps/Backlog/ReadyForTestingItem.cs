@@ -1,4 +1,5 @@
 ﻿using AvansDevOps.ScrumRole;
+using AvansDevOps.Sprint;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace AvansDevOps.Backlog {
             Console.WriteLine("First move to Tested state");
         }
 
-        public override void HandleReadyForTesting(BacklogItem context) {
+        public override void HandleReadyForTesting(BacklogItem context, Sprint.Sprint sprint) {
             Console.WriteLine("Already in ReadyForTesting");
         }
 

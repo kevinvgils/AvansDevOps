@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.Notification {
     public interface INotificationManager {
-        void Attach(User user, INotificationObserver observer);
+        void Attach(User user, List<INotificationObserver> channels);
         void Detach(User user);
         void Notify(String message);
     }

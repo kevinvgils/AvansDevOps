@@ -1,9 +1,11 @@
 ﻿using AvansDevOps.Backlog;
+using AvansDevOps.Notification;
 using AvansDevOps.ScrumRole;
 using AvansDevOps.Sprint.SprintState;
 
 namespace AvansDevOps.Sprint {
     public abstract class Sprint {
+        public NotificationManager NotificationManager = new();
         public List<User> Developers { get; } = new();
         public List<User> Testers { get; } = new();
         public User? Smaster { get; set; }
@@ -38,8 +40,8 @@ namespace AvansDevOps.Sprint {
         public void RemoveMember(User member) {
             if (CheckDevRole(member)) State.RemoveDeveloper(this, member);
         }
-        public void AddTester(User tester) {
-            if (CheckTesterRole(tester)) State.AddDeveloper(this, tester);
+        public void AddTester(User tester, List<INotificationObserver> channels) {
+            if (CheckTesterRole(tester)) State.AddTester(this, tester, channels);
         }
         public void RemoveTester(User tester) {
             if (CheckTesterRole(tester)) State.RemoveTester(this, tester);
@@ -64,6 +66,10 @@ namespace AvansDevOps.Sprint {
         }
         public void SetState(MainState state) {
             State = state;
+        }
+
+        public void NotifyTesters(BacklogItem item) {
+            NotificationManager.Notify(item.GetName() + "is ready for testing");
         }
     }
 }

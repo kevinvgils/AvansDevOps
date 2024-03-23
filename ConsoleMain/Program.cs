@@ -16,8 +16,13 @@ var user2 = new User(new Scrummaster());
 var slack = new SlackObserver();
 var email = new EmailObserver();
 
-notificationManager.Attach(user1, slack);
-notificationManager.Attach(user2, email);
+var list = new List<INotificationObserver> {
+    slack,
+    email
+};
+
+notificationManager.Attach(user1, list);
+notificationManager.Attach(user2, list);
 
 notificationManager.Notify("Hallo dit is het bericht");
 
@@ -58,7 +63,7 @@ report.Export(new PdfStrategy(), "reportDecorated.pdf");
 
 
 //BACKLOGITEMS
-BacklogItem context = new(5, "test item");
+BacklogItem context = new(5, "test item", project.GetSprint());
 
 // Sample workflow
 context.HandleDoing();

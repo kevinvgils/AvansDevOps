@@ -1,4 +1,5 @@
 ﻿using AvansDevOps.Backlog;
+using AvansDevOps.Notification;
 using AvansDevOps.ScrumRole;
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,9 @@ namespace AvansDevOps.Sprint.SprintState {
             sprint.Developers.Add(developer);
         }
 
-        public override void AddTester(Sprint sprint, User tester) {
+        public override void AddTester(Sprint sprint, User tester, List<INotificationObserver> observer) {
             sprint.Testers.Add(tester);
+            sprint.NotificationManager.Attach(tester, observer);
         }
 
         public override void ChangeSprintName(Sprint sprint, string name) {

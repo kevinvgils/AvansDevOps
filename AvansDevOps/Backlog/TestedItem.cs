@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AvansDevOps.Notification;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,10 +17,10 @@ namespace AvansDevOps.Backlog {
             context.SetState(new DoneItem());
         }
 
-        public override void HandleReadyForTesting(BacklogItem context) {
+        public override void HandleReadyForTesting(BacklogItem context, Sprint.Sprint sprint) {
             Console.WriteLine("Moving to Ready for testing...");
             context.SetState(new ReadyForTestingItem());
-            context.NotifyTesters();
+            sprint.NotifyTesters(context);
         }
 
         public override void HandleTested(BacklogItem context) {

@@ -11,11 +11,11 @@ namespace AvansDevOps.Tests {
             User productowner = new(new ProductOwner());
             Project project = new(productowner);
             project.CreateSprint(new ReviewSprintFactory(), "ReviewSprint1");
-            BacklogItem item1 = new(5, "test item");
-            BacklogItem item2 = new(3, "test item");
-            BacklogItem item3 = new(1, "test item");
 
             var sprint = project.GetSprint();
+            BacklogItem item1 = new(5, "test item", sprint);
+            BacklogItem item2 = new(3, "test item", sprint);
+            BacklogItem item3 = new(1, "test item", sprint);
 
 
             // Act
@@ -34,21 +34,21 @@ namespace AvansDevOps.Tests {
             User productowner = new(new ProductOwner());
             Project project = new(productowner);
             project.CreateSprint(new ReviewSprintFactory(), "ReviewSprint1");
-            BacklogItem item1 = new(5, "Item 1");
-            BacklogItem item2 = new(1, "Item 2");
-            BacklogItem item3 = new(3, "Item 3");
 
             var sprint = project.GetSprint();
+            BacklogItem item1 = new(5, "Item 1", sprint);
+            BacklogItem item3 = new(1, "Item 3", sprint);
+            BacklogItem item2 = new(3, "Item 2", sprint);
 
 
             // Act
             sprint.AddBacklogItems(item2);
-            sprint.AddBacklogItems(item1);
             sprint.AddBacklogItems(item3);
+            sprint.AddBacklogItems(item1);
 
             // Assert
-            Assert.That(sprint.BacklogItems[0].GetName(), Is.EqualTo("Item 2"));
-            Assert.That(sprint.BacklogItems[1].GetName(), Is.EqualTo("Item 3"));
+            Assert.That(sprint.BacklogItems[0].GetName(), Is.EqualTo("Item 3"));
+            Assert.That(sprint.BacklogItems[1].GetName(), Is.EqualTo("Item 2"));
             Assert.That(sprint.BacklogItems[2].GetName(), Is.EqualTo("Item 1"));
         }
         [Test]
@@ -57,11 +57,11 @@ namespace AvansDevOps.Tests {
             User productowner = new(new ProductOwner());
             Project project = new(productowner);
             project.CreateSprint(new ReviewSprintFactory(), "ReviewSprint1");
-            BacklogItem item1 = new(5, "Item 1");
-            BacklogItem item2 = new(1, "Item 2");
-            BacklogItem item3 = new(3, "Item 3");
 
             var sprint = project.GetSprint();
+            BacklogItem item1 = new(5, "test item", sprint);
+            BacklogItem item2 = new(3, "test item", sprint);
+            BacklogItem item3 = new(1, "test item", sprint);
 
             var activity = new Activity("Test activity");
 

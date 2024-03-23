@@ -1,4 +1,5 @@
 ﻿using AvansDevOps.Backlog;
+using AvansDevOps.Notification;
 using AvansDevOps.ScrumRole;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace AvansDevOps.Sprint.SprintState {
             throw ex;
         }
 
-        public override void AddTester(Sprint sprint, User tester) {
+        public override void AddTester(Sprint sprint, User tester, List<INotificationObserver> channels) {
             Console.WriteLine(Message);
             throw ex;
         }

@@ -1,4 +1,5 @@
 ﻿using AvansDevOps.Backlog;
+using AvansDevOps.Notification;
 using AvansDevOps.ScrumRole;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace AvansDevOps.Sprint.SprintState {
         public abstract void EndSprint(Sprint sprint);
         public abstract void AddDeveloper(Sprint sprint, User developer);
         public abstract void RemoveDeveloper(Sprint sprint, User developer);
-        public abstract void AddTester(Sprint sprint, User tester);
+        public abstract void AddTester(Sprint sprint, User tester, List<INotificationObserver> channels);
         public abstract void RemoveTester(Sprint sprint, User tester);
         public abstract void SetScrummaster(Sprint sprint, User scrummaster);
 

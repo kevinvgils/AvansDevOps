@@ -16,11 +16,8 @@ namespace AvansDevOps.Backlog {
             Console.WriteLine("Not Allowed first move to 'Ready for Testing'");
         }
 
-        public override void HandleReadyForTesting(BacklogItem context) {
-            Console.WriteLine("Moving item to Ready for Testing state...");
-            context.SetState(new ReadyForTestingItem());
-            // Notify testers
-            context.NotifyTesters();
+        public override void HandleReadyForTesting(BacklogItem context, Sprint.Sprint sprint) {
+            Console.WriteLine("First move to Doing...");
         }
 
         public override void HandleTested(BacklogItem context) {

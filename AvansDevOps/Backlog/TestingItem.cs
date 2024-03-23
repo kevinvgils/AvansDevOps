@@ -14,9 +14,8 @@ namespace AvansDevOps.Backlog {
             Console.WriteLine("FIRST MOVE TO TESTED");
         }
 
-        public override void HandleReadyForTesting(BacklogItem context) {
-            Console.WriteLine("Back to Ready for testing");
-            context.SetState(new ReadyForTestingItem());
+        public override void HandleReadyForTesting(BacklogItem context, Sprint.Sprint sprint) {
+            Console.WriteLine("You're already testing");
         }
 
         public override void HandleTested(BacklogItem context) {
@@ -29,7 +28,8 @@ namespace AvansDevOps.Backlog {
         }
 
         public override void HandleToDo(BacklogItem context) {
-            Console.WriteLine("First move to tested...");
+            context.SetState(new TodoItem());
+            context.NotifyDeveloper();
         }
     }
 }

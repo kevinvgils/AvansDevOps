@@ -1,17 +1,21 @@
-﻿using AvansDevOps.ScrumRole;
+﻿using AvansDevOps.Notification;
+using AvansDevOps.ScrumRole;
 
 namespace AvansDevOps.Backlog {
     public class BacklogItem {
+        public NotificationManager NotificationManager { get; set; } = new();
+        private Sprint.Sprint Sprint { get; set; }
         private User? Developer { get; set; }
         private readonly List<Activity> activities = new();
         private int Priority { get; set; }
         private string Name { get; set; }
         private BacklogState _state { get; set; }
 
-        public BacklogItem(int priority, string name) {
+        public BacklogItem(int priority, string name, Sprint.Sprint sprint) {
             _state = new TodoItem();
             Priority = priority;
             Name = name;
+            Sprint = sprint;
         }
 
         public void SetState(BacklogState state) {
@@ -45,8 +49,9 @@ namespace AvansDevOps.Backlog {
             selected?.SetStatus(status);
         }
 
-        public void SetUser(User user) {
-            Developer = user;
+        public void SetDeveloper(User developer, List<INotificationObserver> channels) {
+            Developer = developer;
+            NotificationManager.Attach(developer, channels);
         }
 
         public void HandleToDo() {
@@ -57,7 +62,7 @@ namespace AvansDevOps.Backlog {
         }
 
         public void HandleReadyForTesting() {
-            _state.HandleReadyForTesting(this);
+            _state.HandleReadyForTesting(this, Sprint);
         }
 
         public void HandleTesting() {
@@ -72,9 +77,8 @@ namespace AvansDevOps.Backlog {
             _state.HandleDone(this);
         }
 
-        public void NotifyTesters() {
-            Console.WriteLine("Notifying testers...");
-            // Implementation of notification logic
+        public void NotifyDeveloper() {
+            NotificationManager.Notify("Moved back to ToDo. Didn't meet Definition of Done in testing");
         }
     }
 }
