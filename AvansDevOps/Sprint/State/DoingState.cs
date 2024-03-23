@@ -33,6 +33,7 @@ namespace AvansDevOps.Sprint.SprintState {
 
         public override void EndSprint(Sprint sprint) {
             sprint.SetState(new FinishedState());
+            sprint.SprintEnded();
         }
 
         public override void RemoveDeveloper(Sprint sprint, User developer) {

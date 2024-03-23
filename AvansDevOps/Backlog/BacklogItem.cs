@@ -1,8 +1,12 @@
-﻿using AvansDevOps.Notification;
+﻿using AvansDevOps.Git;
+using AvansDevOps.Notification;
 using AvansDevOps.ScrumRole;
+using AvansDevOps.Threads;
+using Thread = AvansDevOps.Threads.Thread;
 
 namespace AvansDevOps.Backlog {
     public class BacklogItem {
+        public GitHistory History = new();
         public NotificationManager NotificationManager { get; set; } = new();
         private Sprint.Sprint Sprint { get; set; }
         private User? Developer { get; set; }
@@ -10,12 +14,14 @@ namespace AvansDevOps.Backlog {
         private int Priority { get; set; }
         private string Name { get; set; }
         private BacklogState _state { get; set; }
+        public Thread Thread { get; set; } = new();
 
         public BacklogItem(int priority, string name, Sprint.Sprint sprint) {
             _state = new TodoItem();
             Priority = priority;
             Name = name;
             Sprint = sprint;
+            History.ExecuteCommand(new GitBranch());
         }
 
         public void SetState(BacklogState state) {

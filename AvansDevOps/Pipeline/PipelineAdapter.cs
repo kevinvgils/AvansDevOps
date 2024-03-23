@@ -6,32 +6,36 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.Pipeline {
     public class PipelineAdapter : IPipelineManager {
+        private readonly ExternalPipelineAdapter _adaptee;
+        public PipelineAdapter(ExternalPipelineAdapter adapter) { 
+            _adaptee = adapter;
+        }
         public void BuildSoftware() {
-            Console.WriteLine("Build software");
+            Console.WriteLine($"'{this._adaptee.ExecuteRequest()}' Build software");
         }
 
         public void DeployToAzure() {
-            Console.WriteLine("Deploy to azure");
+            Console.WriteLine($"'{this._adaptee.ExecuteRequest()}' Deploy to azure");
         }
 
         public void ExecuteTests() {
-            Console.WriteLine("Execute Tests");
+            Console.WriteLine($"'{this._adaptee.ExecuteRequest()}' Execute Tests");
         }
 
         public void InstallPackages() {
-            Console.WriteLine("Install Packages");
+            Console.WriteLine($"'{this._adaptee.ExecuteRequest()}' Install Packages");
         }
 
         public void PerformUtilityActions() {
-            Console.WriteLine("Perform UtilityActions");
+            Console.WriteLine($"'{this._adaptee.ExecuteRequest()}' Perform UtilityActions");
         }
 
         public void RetrieveSourceCode() {
-            Console.WriteLine("Retrieve Source Code");
+            Console.WriteLine($"'{this._adaptee.ExecuteRequest()}' Retrieve Source Code");
         }
 
         public void RunCodeAnalysis() {
-            Console.WriteLine("Run Code Analysis");
+            Console.WriteLine($"'{this._adaptee.ExecuteRequest()}' Run Code Analysis");
         }
     }
 }

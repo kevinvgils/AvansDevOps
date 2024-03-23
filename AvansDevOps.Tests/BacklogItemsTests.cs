@@ -148,7 +148,7 @@ namespace AvansDevOps.Tests {
             backlogItem.HandleReadyForTesting();
             // Assert
             string[] consoleOutputLines = sw.ToString().Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-            string lastLine = consoleOutputLines[consoleOutputLines.Length - 1];
+            string lastLine = consoleOutputLines[consoleOutputLines.Length - 4];
             Assert.That(lastLine, Is.EqualTo("Sending Slack message: Sample Backlog Itemis ready for testing"));
         }
     }

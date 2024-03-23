@@ -1,4 +1,5 @@
-﻿using AvansDevOps.ScrumRole;
+﻿using AvansDevOps.Git;
+using AvansDevOps.ScrumRole;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,9 @@ namespace AvansDevOps.Backlog {
             Console.WriteLine("Moving to ReadyForTesting...");
             context.SetState(new ReadyForTestingItem());
             sprint.NotifyTesters(context);
+            context.History.ExecuteCommand(new GitPull());
+            context.History.ExecuteCommand(new GitCommit());
+            context.History.ExecuteCommand(new GitPush());
         }
 
         public override void HandleTested(BacklogItem context) {
