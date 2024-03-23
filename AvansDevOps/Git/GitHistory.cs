@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.Git {
     public class GitHistory {
-        private List<GitCommand> Commands = new();
+        private readonly List<GitCommand> Commands = new();
 
         public void ExecuteCommand(GitCommand command) {
             command.Execute();

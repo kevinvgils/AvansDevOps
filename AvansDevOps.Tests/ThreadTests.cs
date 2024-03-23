@@ -23,9 +23,12 @@ namespace AvansDevOps.Tests {
             backlogItem.Thread.AddComment(new Threads.Comment("Hallo eerste comment", developer));
 
             // Assert
-            Assert.That(backlogItem.Thread, Is.Not.Null);
-            Assert.That(backlogItem.Thread.GetAllComments().Count, Is.EqualTo(1));
-            Assert.That(backlogItem.Thread.GetAllComments()[0].Message, Is.EqualTo("Hallo eerste comment"));
+            Assert.Multiple(() => {
+
+                Assert.That(backlogItem.Thread, Is.Not.Null);
+                Assert.That(backlogItem.Thread.GetAllComments(), Has.Count.EqualTo(1));
+                Assert.That(backlogItem.Thread.GetAllComments()[0].Message, Is.EqualTo("Hallo eerste comment"));
+            });
         }
     }
 }

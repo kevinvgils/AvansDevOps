@@ -42,10 +42,12 @@ namespace AvansDevOps.Tests {
             sprint.AddBacklogItems(item2);
             sprint.AddBacklogItems(item1);
             sprint.AddBacklogItems(item3);
+            Assert.Multiple(() => {
 
-            // Assert
-            Assert.That(sprint.BacklogItems, Has.Count.EqualTo(3));
-            Assert.That(item1.GetPriority(), Is.EqualTo(5));
+                // Assert
+                Assert.That(sprint.BacklogItems, Has.Count.EqualTo(3));
+                Assert.That(item1.GetPriority(), Is.EqualTo(5));
+            });
         }
 
         [Test]
@@ -65,12 +67,15 @@ namespace AvansDevOps.Tests {
             sprint.AddBacklogItems(item2);
             sprint.AddBacklogItems(item3);
             sprint.AddBacklogItems(item1);
+            Assert.Multiple(() => {
 
-            // Assert
-            Assert.That(sprint.BacklogItems[0].GetName(), Is.EqualTo("Item 3"));
-            Assert.That(sprint.BacklogItems[1].GetName(), Is.EqualTo("Item 2"));
-            Assert.That(sprint.BacklogItems[2].GetName(), Is.EqualTo("Item 1"));
+                // Assert
+                Assert.That(sprint.BacklogItems[0].GetName(), Is.EqualTo("Item 3"));
+                Assert.That(sprint.BacklogItems[1].GetName(), Is.EqualTo("Item 2"));
+                Assert.That(sprint.BacklogItems[2].GetName(), Is.EqualTo("Item 1"));
+            });
         }
+
         [Test]
         public void US1_2AddActivityToBacklogItem_ShouldAddActivity() {
             // Arrange
@@ -92,9 +97,11 @@ namespace AvansDevOps.Tests {
             sprint.AddBacklogItems(item3);
             sprint.BacklogItems[0].AddActivity(activity);
             List<Activity> activities = sprint.BacklogItems[0].GetActivities();
-            // Assert
-            Assert.That(sprint.BacklogItems[0].GetActivities().Count, Is.EqualTo(1));
-            Assert.That(activities[0].GetName(), Is.EqualTo("Test activity"));
+            Assert.Multiple(() => {
+                // Assert
+                Assert.That(sprint.BacklogItems[0].GetActivities().Count, Is.EqualTo(1));
+                Assert.That(activities[0].GetName(), Is.EqualTo("Test activity"));
+            });
         }
 
         [Test]

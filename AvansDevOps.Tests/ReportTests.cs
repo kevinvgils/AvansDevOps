@@ -48,8 +48,11 @@ namespace AvansDevOps.Tests {
             var generatedReport = baseReport.generate(sprint);
 
             // Assert
-            Assert.That(generatedReport, Is.Not.Null);
-            Assert.That(generatedReport, Does.Contain("Report: ReviewSprint1"));
+            Assert.Multiple(() => {
+
+                Assert.That(generatedReport, Is.Not.Null);
+                Assert.That(generatedReport, Does.Contain("Report: ReviewSprint1"));
+            });
         }
 
         [Test]
@@ -120,8 +123,11 @@ namespace AvansDevOps.Tests {
 
 
             // Assert
-            Assert.That(pngLine, Does.StartWith("PNG"));
-            Assert.That(pdfLine, Does.StartWith("PDF"));
+            Assert.Multiple(() => {
+
+                Assert.That(pngLine, Does.StartWith("PNG"));
+                Assert.That(pdfLine, Does.StartWith("PDF"));
+            });
 
         }
 

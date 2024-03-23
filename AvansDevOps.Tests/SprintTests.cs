@@ -29,12 +29,15 @@ namespace AvansDevOps.Tests {
             sprint.AddBacklogItems(item1);
 
             //Arrange
-            Assert.That(sprint, Is.Not.Null);
-            Assert.That(sprint.EndDate, Is.EqualTo(endDate));
-            Assert.That(sprint.StartDate, Is.EqualTo(startDate));
-            Assert.That(sprint.Name, Is.EqualTo("ReviewSprint1"));
-            Assert.That(sprint.BacklogItems, Has.Count.EqualTo(1));
+            Assert.Multiple(() => {
+                Assert.That(sprint, Is.Not.Null);
+                Assert.That(sprint.EndDate, Is.EqualTo(endDate));
+                Assert.That(sprint.StartDate, Is.EqualTo(startDate));
+                Assert.That(sprint.Name, Is.EqualTo("ReviewSprint1"));
+                Assert.That(sprint.BacklogItems, Has.Count.EqualTo(1));
+            });
         }
+
         [Test]
         public void US1_3_AND_US1_5_StartSprint_WhenSprintInDoingNotAllowedToEditData() {
             //Arange
@@ -68,15 +71,18 @@ namespace AvansDevOps.Tests {
 
 
             //Arrange
-            Assert.Throws<SystemException>(testDelegate);
-            Assert.Throws<SystemException>(testDelegate);
-            Assert.Throws<SystemException>(testDelegate3);
-            Assert.Throws<SystemException>(testDelegate4);
-            Assert.Throws<SystemException>(testDelegate5);
-            Assert.Throws<SystemException>(testDelegate6);
-            Assert.Throws<SystemException>(testDelegate7);
-            Assert.Throws<SystemException>(testDelegate8);
-            Assert.Throws<SystemException>(testDelegate9);
+            Assert.Multiple(() => {
+
+                Assert.Throws<SystemException>(testDelegate);
+                Assert.Throws<SystemException>(testDelegate);
+                Assert.Throws<SystemException>(testDelegate3);
+                Assert.Throws<SystemException>(testDelegate4);
+                Assert.Throws<SystemException>(testDelegate5);
+                Assert.Throws<SystemException>(testDelegate6);
+                Assert.Throws<SystemException>(testDelegate7);
+                Assert.Throws<SystemException>(testDelegate8);
+                Assert.Throws<SystemException>(testDelegate9);
+            });
         }
         [Test]
         public void US1_3_AND_US1_5_StartSprint_WhenSprintInFinishedNotAllowedToEditData() {
@@ -113,16 +119,19 @@ namespace AvansDevOps.Tests {
 
 
             //Arrange
-            Assert.Throws<SystemException>(testDelegate);
-            Assert.Throws<SystemException>(testDelegate);
-            Assert.Throws<SystemException>(testDelegate3);
-            Assert.Throws<SystemException>(testDelegate4);
-            Assert.Throws<SystemException>(testDelegate5);
-            Assert.Throws<SystemException>(testDelegate6);
-            Assert.Throws<SystemException>(testDelegate7);
-            Assert.Throws<SystemException>(testDelegate8);
-            Assert.Throws<SystemException>(testDelegate9);
-            Assert.Throws<SystemException>(testDelegate10);
+            Assert.Multiple(() => {
+
+                Assert.Throws<SystemException>(testDelegate);
+                Assert.Throws<SystemException>(testDelegate);
+                Assert.Throws<SystemException>(testDelegate3);
+                Assert.Throws<SystemException>(testDelegate4);
+                Assert.Throws<SystemException>(testDelegate5);
+                Assert.Throws<SystemException>(testDelegate6);
+                Assert.Throws<SystemException>(testDelegate7);
+                Assert.Throws<SystemException>(testDelegate8);
+                Assert.Throws<SystemException>(testDelegate9);
+                Assert.Throws<SystemException>(testDelegate10);
+            });
         }
     }
 }

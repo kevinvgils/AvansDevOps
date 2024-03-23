@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.Backlog {
     public class DoingItem : BacklogState {
-        private readonly Exception Message = new Exception("Not Allowed first move to 'Ready for Testing'");
+        private const string Message = "Not Allowed first move to 'Ready for Testing'";
         public override void HandleDoing(BacklogItem context) {
             Console.WriteLine("Already in Doing...");
         }
 
         public override void HandleDone(BacklogItem context) {
-            Console.WriteLine("Not Allowed first move to 'Ready for Testing'");
-            throw Message;
+            Console.WriteLine(Message);
+            throw new ArgumentException(Message);
         }
 
         public override void HandleReadyForTesting(BacklogItem context, Sprint.Sprint sprint) {
-            if (context.GetActivities().Any(activity => !activity.GetStatus())) throw new Exception("Some activities are not done yet. Finish them first");
+            if (context.GetActivities().Exists(activity => !activity.GetStatus())) throw new Exception("Some activities are not done yet. Finish them first");
             Console.WriteLine("Moving to ReadyForTesting...");
             context.SetState(new ReadyForTestingItem());
             sprint.NotifyTesters(context);
@@ -29,13 +29,13 @@ namespace AvansDevOps.Backlog {
         }
 
         public override void HandleTested(BacklogItem context) {
-            Console.WriteLine("Not Allowed first move to 'Ready for Testing'");
-            throw Message;
+            Console.WriteLine(Message);
+            throw new ArgumentException(Message);
         }
 
         public override void HandleTesting(BacklogItem context) {
-            Console.WriteLine("Not Allowed first move to 'Ready for Testing'");
-            throw Message;
+            Console.WriteLine(Message);
+            throw new ArgumentException(Message);
         }
 
         public override void HandleToDo(BacklogItem context) {

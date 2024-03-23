@@ -15,22 +15,22 @@ namespace AvansDevOps.Sprint {
         public DateOnly? StartDate { get; set; }
         public DateOnly? EndDate { get; set; }
 
-        public Sprint(string name) { 
+        protected Sprint(string name) { 
             Name = name;
             State = new CreatedState();
         }
 
         public abstract void SprintEnded();
 
-        private bool CheckDevRole(User user) {
+        private static bool CheckDevRole(User user) {
             if (user.GetRole() is not Developer) throw new ArgumentException("User should have the role of Developer");
             return true;
         }
-        private bool CheckTesterRole(User user) {
+        private static bool CheckTesterRole(User user) {
             if (user.GetRole() is not Tester) throw new ArgumentException("User should have the role of Developer");
             return true;
         }
-        private bool CheckScrummasterRole(User user) {
+        private static bool CheckScrummasterRole(User user) {
             if (user.GetRole() is not Scrummaster) throw new ArgumentException("User should have the role of Scrummaster");
             return true;
         }

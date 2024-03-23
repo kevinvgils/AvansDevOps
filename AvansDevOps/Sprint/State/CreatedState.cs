@@ -18,9 +18,9 @@ namespace AvansDevOps.Sprint.SprintState {
             sprint.Developers.Add(developer);
         }
 
-        public override void AddTester(Sprint sprint, User tester, List<INotificationObserver> observer) {
+        public override void AddTester(Sprint sprint, User tester, List<INotificationObserver> channels) {
             sprint.Testers.Add(tester);
-            sprint.NotificationManager.Attach(tester, observer);
+            sprint.NotificationManager.Attach(tester, channels);
         }
 
         public override void ChangeSprintName(Sprint sprint, string name) {

@@ -11,31 +11,31 @@ namespace AvansDevOps.Pipeline {
             _adaptee = adapter;
         }
         public void BuildSoftware() {
-            Console.WriteLine($"'{this._adaptee.ExecuteRequest()}' Build software");
+            Console.WriteLine("'" + _adaptee.ExecuteRequest() + "' Build software");
         }
 
         public void DeployToAzure() {
-            Console.WriteLine($"'{this._adaptee.ExecuteRequest()}' Deploy to azure");
+            Console.WriteLine($"'{_adaptee.ExecuteRequest}' Deploy to azure");
         }
 
         public void ExecuteTests() {
-            Console.WriteLine($"'{this._adaptee.ExecuteRequest()}' Execute Tests");
+            Console.WriteLine($"'{_adaptee.ExecuteRequest}' Execute Tests");
         }
 
         public void InstallPackages() {
-            Console.WriteLine($"'{this._adaptee.ExecuteRequest()}' Install Packages");
+            Console.WriteLine($"'{_adaptee.ExecuteRequest}' Install Packages");
         }
 
         public void PerformUtilityActions() {
-            Console.WriteLine($"'{this._adaptee.ExecuteRequest()}' Perform UtilityActions");
+            Console.WriteLine($"'{_adaptee.ExecuteRequest}' Perform UtilityActions");
         }
 
         public void RetrieveSourceCode() {
-            Console.WriteLine($"'{this._adaptee.ExecuteRequest()}' Retrieve Source Code");
+            Console.WriteLine($"'{_adaptee.ExecuteRequest}' Retrieve Source Code");
         }
 
         public void RunCodeAnalysis() {
-            Console.WriteLine($"'{this._adaptee.ExecuteRequest()}' Run Code Analysis");
+            Console.WriteLine($"'{_adaptee.ExecuteRequest}' Run Code Analysis");
         }
     }
 }
