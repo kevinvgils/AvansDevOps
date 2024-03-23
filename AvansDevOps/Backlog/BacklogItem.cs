@@ -4,15 +4,29 @@ namespace AvansDevOps.Backlog {
     public class BacklogItem {
         private User? Developer { get; set; }
         private readonly List<Activity> activities = new();
+        private int Priority { get; set; }
+        private string Name { get; set; }
         private BacklogState _state { get; set; }
 
-        public BacklogItem() {
+        public BacklogItem(int priority, string name) {
             _state = new TodoItem();
+            Priority = priority;
+            Name = name;
         }
 
         public void SetState(BacklogState state) {
             _state = state;
         }
+
+        public void SetPriority(int priority) {
+            if (priority < 0) Priority = priority;
+        }
+        public int GetPriority() {
+            return Priority;
+        }
+
+        public void SetName(string name) { Name = name; }
+        public string GetName() { return Name; }
 
         public void AddActivity(Activity activity) { 
             activities.Add(activity);

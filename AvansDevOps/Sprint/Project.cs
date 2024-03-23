@@ -22,5 +22,6 @@ namespace AvansDevOps.Sprint {
         public User GetProductOwner() { return Powner; }
         public void SetUser(User productOwner) { Powner = productOwner; }
         public List<Sprint> GetSprints() { return Sprints; }
+        public Sprint GetSprint() { return Sprints[0]; }
     }
 }

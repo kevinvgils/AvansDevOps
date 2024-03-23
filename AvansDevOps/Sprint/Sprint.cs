@@ -5,8 +5,9 @@ using AvansDevOps.Sprint.SprintState;
 namespace AvansDevOps.Sprint {
     public abstract class Sprint {
         public List<User> Developers { get; } = new();
+        public List<User> Testers { get; } = new();
         public User? Smaster { get; set; }
-        public List<BacklogItem> BacklogItems { get; } = new();
+        public List<BacklogItem> BacklogItems { get; set; } = new();
         public string Name { get; set; }
         private MainState State { get; set; }
         public DateOnly? StartDate { get; set; }
@@ -23,18 +24,28 @@ namespace AvansDevOps.Sprint {
             if (user.GetRole() is not Developer) throw new ArgumentException("User should have the role of Developer");
             return true;
         }
+        private bool CheckTesterRole(User user) {
+            if (user.GetRole() is not Tester) throw new ArgumentException("User should have the role of Developer");
+            return true;
+        }
         private bool CheckScrummasterRole(User user) {
             if (user.GetRole() is not Scrummaster) throw new ArgumentException("User should have the role of Scrummaster");
             return true;
         }
         public void AddMember(User member) {
-            if (CheckDevRole(member)) Developers.Add(member);
+            if (CheckDevRole(member)) State.AddDeveloper(this, member);
         }
         public void RemoveMember(User member) {
-            if (CheckDevRole(member)) Developers.Remove(member);
+            if (CheckDevRole(member)) State.RemoveDeveloper(this, member);
+        }
+        public void AddTester(User tester) {
+            if (CheckTesterRole(tester)) State.AddDeveloper(this, tester);
+        }
+        public void RemoveTester(User tester) {
+            if (CheckTesterRole(tester)) State.RemoveTester(this, tester);
         }
         public void SetScrummaster(User scrummaster) {
-            if(CheckScrummasterRole(scrummaster)) Smaster = scrummaster;
+            if(CheckScrummasterRole(scrummaster)) State.SetScrummaster(this, scrummaster);
         }
         public void ChangeSprintName(string name) {
             State.ChangeSprintName(this, name);

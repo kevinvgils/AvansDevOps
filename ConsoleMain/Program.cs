@@ -32,7 +32,7 @@ project.CreateSprint(new ReviewSprintFactory(), "ReviewSprint1");
 
 Console.WriteLine("List of Sprints in the Project:");
 foreach (var sprint in project.GetSprints()) {
-    sprint.EndSprint();
+//    sprint.EndSprint();
     sprint.StartSprint();
     sprint.EndSprint();
 }
@@ -58,7 +58,7 @@ report.Export(new PdfStrategy(), "reportDecorated.pdf");
 
 
 //BACKLOGITEMS
-BacklogItem context = new BacklogItem();
+BacklogItem context = new(5, "test item");
 
 // Sample workflow
 context.HandleDoing();
