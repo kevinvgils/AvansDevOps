@@ -113,7 +113,7 @@ namespace AvansDevOps.Tests {
             baseReport.Export(pdfStrategy, "TestReport.pdf", sprint);
             baseReport.Export(pngStrategy, "TestReport.png", sprint);
             string[] consoleOutputLines = sw.ToString().Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-            string pngLine = consoleOutputLines[6];
+            string pngLine = consoleOutputLines[7];
             string pdfLine = consoleOutputLines[1];
 
 
