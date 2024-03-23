@@ -122,7 +122,7 @@ namespace AvansDevOps.Tests {
             Assert.Multiple(() => {
 
                 Assert.Throws<SystemException>(testDelegate);
-                Assert.Throws<SystemException>(testDelegate);
+                Assert.Throws<SystemException>(testDelegate2);
                 Assert.Throws<SystemException>(testDelegate3);
                 Assert.Throws<SystemException>(testDelegate4);
                 Assert.Throws<SystemException>(testDelegate5);

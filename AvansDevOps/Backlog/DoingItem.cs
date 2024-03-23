@@ -8,14 +8,19 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.Backlog {
     public class DoingItem : BacklogState {
-        private const string Message = "Not Allowed first move to 'Ready for Testing'";
+        private readonly string Message = "Not Allowed first move to 'Ready for Testing'";
+        private readonly SystemException ex = new("Not Allowed");
+
+        private void PrintMessageAndThrowException() {
+            Console.WriteLine(Message);
+            throw ex;
+        }
         public override void HandleDoing(BacklogItem context) {
             Console.WriteLine("Already in Doing...");
         }
 
         public override void HandleDone(BacklogItem context) {
-            Console.WriteLine(Message);
-            throw new ArgumentException(Message);
+            PrintMessageAndThrowException();
         }
 
         public override void HandleReadyForTesting(BacklogItem context, Sprint.Sprint sprint) {
@@ -29,13 +34,11 @@ namespace AvansDevOps.Backlog {
         }
 
         public override void HandleTested(BacklogItem context) {
-            Console.WriteLine(Message);
-            throw new ArgumentException(Message);
+            PrintMessageAndThrowException();
         }
 
         public override void HandleTesting(BacklogItem context) {
-            Console.WriteLine(Message);
-            throw new ArgumentException(Message);
+            PrintMessageAndThrowException();
         }
 
         public override void HandleToDo(BacklogItem context) {

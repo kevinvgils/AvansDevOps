@@ -180,14 +180,23 @@ namespace AvansDevOps.Tests {
             backlogItem.HandleTesting();
             backlogItem.HandleTested();
             backlogItem.HandleDone();
-            backlogItem.HandleReadyForTesting();
+            void testDelegate() => backlogItem.HandleReadyForTesting();
+            void testDelegate1() => backlogItem.HandleDone();
+            void testDelegate2() => backlogItem.HandleToDo();
+            void testDelegate3() => backlogItem.HandleTested();
+            void testDelegate4() => backlogItem.HandleTesting();
+            void testDelegate5() => backlogItem.HandleDoing();
             // Assert
             string[] consoleOutputLines = sw.ToString().Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-            string lastLine = consoleOutputLines[consoleOutputLines.Length - 1];
-            string doneLine = consoleOutputLines[consoleOutputLines.Length - 2];
+            string doneLine = consoleOutputLines[consoleOutputLines.Length - 1];
             Assert.Multiple(() => {
-                Assert.That(lastLine, Is.EqualTo("Already done. Create a new item"));
                 Assert.That(doneLine, Is.EqualTo("Moving to Done..."));
+                Assert.Throws<SystemException>(testDelegate);
+                Assert.Throws<SystemException>(testDelegate1);
+                Assert.Throws<SystemException>(testDelegate2);
+                Assert.Throws<SystemException>(testDelegate3);
+                Assert.Throws<SystemException>(testDelegate4);
+                Assert.Throws<SystemException>(testDelegate5);
             });
         }
     }

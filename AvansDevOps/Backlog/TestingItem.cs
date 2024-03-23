@@ -7,15 +7,22 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.Backlog {
     public class TestingItem : BacklogState {
+        private readonly string Message = "Not Allowed!";
+        private readonly SystemException ex = new("Not Allowed");
+
+        private void PrintMessageAndThrowException() {
+            Console.WriteLine(Message);
+            throw ex;
+        }
         public override void HandleDoing(BacklogItem context) {
-            Console.WriteLine("Not allowed move to ToDo");
+            PrintMessageAndThrowException();
         }
         public override void HandleDone(BacklogItem context) {
-            Console.WriteLine("FIRST MOVE TO TESTED");
+            PrintMessageAndThrowException();
         }
 
         public override void HandleReadyForTesting(BacklogItem context, Sprint.Sprint sprint) {
-            Console.WriteLine("You're already testing");
+            PrintMessageAndThrowException();
         }
 
         public override void HandleTested(BacklogItem context) {
@@ -24,7 +31,7 @@ namespace AvansDevOps.Backlog {
         }
 
         public override void HandleTesting(BacklogItem context) {
-            Console.WriteLine("Already in Testing");
+            PrintMessageAndThrowException();
         }
 
         public override void HandleToDo(BacklogItem context) {

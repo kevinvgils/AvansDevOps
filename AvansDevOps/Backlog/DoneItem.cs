@@ -7,29 +7,35 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.Backlog {
     public class DoneItem : BacklogState {
-        private const string message = "Already done. Create a new item";
+        private readonly string Message = "Not Allowed first move to 'Ready for Testing'";
+        private readonly SystemException ex = new("Not Allowed");
+
+        private void PrintMessageAndThrowException() {
+            Console.WriteLine(Message);
+            throw ex;
+        }        
         public override void HandleDoing(BacklogItem context) {
-            Console.WriteLine(message);
+            PrintMessageAndThrowException();
         }
 
         public override void HandleDone(BacklogItem context) {
-            Console.WriteLine(message);
+            PrintMessageAndThrowException();
         }
 
         public override void HandleReadyForTesting(BacklogItem context, Sprint.Sprint sprint) {
-            Console.WriteLine(message);
+            PrintMessageAndThrowException();
         }
 
         public override void HandleTested(BacklogItem context) {
-            Console.WriteLine(message);
+            PrintMessageAndThrowException();
         }
 
         public override void HandleTesting(BacklogItem context) {
-            Console.WriteLine(message);
+            PrintMessageAndThrowException();
         }
 
         public override void HandleToDo(BacklogItem context) {
-            Console.WriteLine(message);
+            PrintMessageAndThrowException();
         }
     }
 }

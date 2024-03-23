@@ -7,8 +7,15 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.Backlog {
     public class TestedItem : BacklogState {
+        private readonly string Message = "Not Allowed first move to 'Ready for Testing'";
+        private readonly SystemException ex = new("Not Allowed");
+
+        private void PrintMessageAndThrowException() {
+            Console.WriteLine(Message);
+            throw ex;
+        }
         public override void HandleDoing(BacklogItem context) {
-            Console.WriteLine("Not allowed move to ReadyForTesting or done");
+            PrintMessageAndThrowException();
         }
 
         public override void HandleDone(BacklogItem context) {
@@ -24,15 +31,15 @@ namespace AvansDevOps.Backlog {
         }
 
         public override void HandleTested(BacklogItem context) {
-            Console.WriteLine("Already in Tested");
+            PrintMessageAndThrowException();
         }
 
         public override void HandleTesting(BacklogItem context) {
-            Console.WriteLine("Already tested. Let developer move it to Done or move to ReadyForTesting");
+            PrintMessageAndThrowException();
         }
 
         public override void HandleToDo(BacklogItem context) {
-            Console.WriteLine("Let tester test again first. Move it to Ready for testing.");
+            PrintMessageAndThrowException();
         }
     }
 }
