@@ -3,32 +3,31 @@ using AvansDevOps.Notification;
 using AvansDevOps.ScrumRole;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AvansDevOps.Sprint.SprintState {
     public class DoingState : MainState {
-        private string Message = "Not Allowed";
-        private SystemException ex = new("Not Allowed");
-        public override void AddBacklogItems(Sprint sprint, BacklogItem item) {
+        private const string Message = "Not Allowed";
+        private static readonly SystemException ex = new SystemException(Message);
+
+        private void HandleNotAllowedAction() {
             Console.WriteLine(Message);
             throw ex;
+        }
+
+        public override void AddBacklogItems(Sprint sprint, BacklogItem item) {
+            HandleNotAllowedAction();
         }
 
         public override void AddDeveloper(Sprint sprint, User developer) {
-            Console.WriteLine(Message);
-            throw ex;
+            HandleNotAllowedAction();
         }
 
         public override void AddTester(Sprint sprint, User tester, List<INotificationObserver> channels) {
-            Console.WriteLine(Message);
-            throw ex;
+            HandleNotAllowedAction();
         }
 
         public override void ChangeSprintName(Sprint sprint, string name) {
-            Console.WriteLine(Message);
-            throw ex;
+            HandleNotAllowedAction();
         }
 
         public override void EndSprint(Sprint sprint) {
@@ -37,28 +36,23 @@ namespace AvansDevOps.Sprint.SprintState {
         }
 
         public override void RemoveDeveloper(Sprint sprint, User developer) {
-            Console.WriteLine(Message);
-            throw ex;
+            HandleNotAllowedAction();
         }
 
         public override void RemoveTester(Sprint sprint, User tester) {
-            Console.WriteLine(Message);
-            throw ex;
+            HandleNotAllowedAction();
         }
 
         public override void SetScrummaster(Sprint sprint, User scrummaster) {
-            Console.WriteLine(Message);
-            throw ex;
+            HandleNotAllowedAction();
         }
 
         public override void SetStartAndEndDate(Sprint sprint, DateOnly startDate, DateOnly endDate) {
-            Console.WriteLine(Message);
-            throw ex;
+            HandleNotAllowedAction();
         }
 
         public override void StartSprint(Sprint sprint) {
-            Console.WriteLine(Message);
-            throw ex;
+            HandleNotAllowedAction();
         }
     }
 }
