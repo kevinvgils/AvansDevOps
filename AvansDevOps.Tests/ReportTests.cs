@@ -103,13 +103,8 @@ namespace AvansDevOps.Tests {
             // Arrange
             User productowner = new(new ProductOwner());
             Project project = new(productowner);
-            DateOnly startDate = new DateOnly(2024, 3, 23);
-            DateOnly endDate = new DateOnly(2024, 4, 12);
-            User scrumm = new(new Scrummaster());
             project.CreateSprint(new ReviewSprintFactory(), "ReviewSprint1");
             var sprint = project.GetSprint();
-            sprint.SetScrummaster(scrumm);
-            sprint.SetStartAndEndDate(startDate, endDate);
             var baseReport = new BaseReport();
             var pdfStrategy = new PdfStrategy();
             var pngStrategy = new PngStrategy();
