@@ -7,19 +7,20 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.Sprint {
     public class Project {
-        private List<Sprint> sprints = new();
-        private User productOwner;
+        private readonly List<Sprint> Sprints = new();
+        private User Powner;
 
         public Project(User productOwner) {
-            this.productOwner = productOwner;
+            if (productOwner.GetRole() is not ProductOwner) throw new ArgumentException("User should be of role ProductOwner");
+            Powner = productOwner;
         }
         public void CreateSprint(ISprintFactory sprintFactory, string sprintName) {
             Sprint sprint = sprintFactory.CreateSprint(sprintName);
-            sprints.Add(sprint);
+            Sprints.Add(sprint);
         }
 
-        public User GetUser() { return productOwner; }
-        public void SetUser(User user) { productOwner = user; }
-        public List<Sprint> GetSprints() { return sprints; }
+        public User GetProductOwner() { return Powner; }
+        public void SetUser(User productOwner) { Powner = productOwner; }
+        public List<Sprint> GetSprints() { return Sprints; }
     }
 }

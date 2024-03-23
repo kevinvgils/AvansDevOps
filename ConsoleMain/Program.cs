@@ -23,7 +23,7 @@ notificationManager.Notify("Hallo dit is het bericht");
 
 
 // SPRINT FACTORY
-var productowner = new User(new ProductOwner());
+User productowner = new(new ProductOwner());
 Project project = new(productowner);
 
 project.CreateSprint(new DeploymentSprintFactory(), "DeploymentSprint1");
