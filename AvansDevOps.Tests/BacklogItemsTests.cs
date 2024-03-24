@@ -272,5 +272,68 @@ namespace AvansDevOps.Tests {
 
             });
         }
+
+        [Test]
+        public void HandleTodoStateBacklogItem() {
+            // Arrange
+            User productowner = new(new ProductOwner());
+            User developer = new(new Developer());
+            Project project = new(productowner);
+            project.CreateSprint(new ReviewSprintFactory(), "ReviewSprint1");
+            var channelsMock = new List<INotificationObserver> {
+                new SlackObserver()
+            };
+            var backlogItem = new BacklogItem(1, "Sample Backlog Item", project.GetSprint());
+            backlogItem.SetDeveloper(developer, channelsMock);
+
+            // Act
+            void testDelegate5() => backlogItem.HandleDone();
+            void testDelegate() => backlogItem.HandleReadyForTesting();
+            void testDelegate2() => backlogItem.HandleToDo();
+            void testDelegate3() => backlogItem.HandleTesting();
+            void testDelegate6() => backlogItem.HandleTested();
+            // Assert
+            string[] consoleOutputLines = sw.ToString().Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            string doneLine = consoleOutputLines[consoleOutputLines.Length - 1];
+            Assert.Multiple(() => {
+                Assert.Throws<SystemException>(testDelegate2);
+                Assert.Throws<SystemException>(testDelegate3);
+                Assert.Throws<SystemException>(testDelegate5);
+                Assert.Throws<SystemException>(testDelegate6);
+                Assert.Throws<SystemException>(testDelegate);
+
+            });
+        }
+
+        [Test]
+        public void HandleDoingStateBacklogItem() {
+            // Arrange
+            User productowner = new(new ProductOwner());
+            User developer = new(new Developer());
+            Project project = new(productowner);
+            project.CreateSprint(new ReviewSprintFactory(), "ReviewSprint1");
+            var channelsMock = new List<INotificationObserver> {
+                new SlackObserver()
+            };
+            var backlogItem = new BacklogItem(1, "Sample Backlog Item", project.GetSprint());
+            backlogItem.SetDeveloper(developer, channelsMock);
+
+            // Act
+            backlogItem.HandleDoing();
+            void testDelegate5() => backlogItem.HandleDoing();
+            void testDelegate() => backlogItem.HandleDone();
+            void testDelegate3() => backlogItem.HandleTesting();
+            void testDelegate6() => backlogItem.HandleTested();
+            // Assert
+            string[] consoleOutputLines = sw.ToString().Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            string doneLine = consoleOutputLines[consoleOutputLines.Length - 1];
+            Assert.Multiple(() => {
+                Assert.Throws<SystemException>(testDelegate3);
+                Assert.Throws<SystemException>(testDelegate5);
+                Assert.Throws<SystemException>(testDelegate6);
+                Assert.Throws<SystemException>(testDelegate);
+
+            });
+        }
     }
 }

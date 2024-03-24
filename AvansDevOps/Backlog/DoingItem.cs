@@ -16,7 +16,7 @@ namespace AvansDevOps.Backlog {
             throw ex;
         }
         public override void HandleDoing(BacklogItem context) {
-            Console.WriteLine("Already in Doing...");
+            PrintMessageAndThrowException();        
         }
 
         public override void HandleDone(BacklogItem context) {
