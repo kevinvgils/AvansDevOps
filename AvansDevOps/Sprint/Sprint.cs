@@ -9,7 +9,7 @@ namespace AvansDevOps.Sprint {
         public List<User> Developers { get; } = new();
         public List<User> Testers { get; } = new();
         public User? Smaster { get; set; }
-        public List<BacklogItem> BacklogItems { get; set; } = new();
+        public virtual List<BacklogItem> BacklogItems { get; set; } = new();
         public string Name { get; set; }
         private MainState State { get; set; }
         public DateOnly? StartDate { get; set; }

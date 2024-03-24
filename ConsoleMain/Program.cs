@@ -37,7 +37,7 @@
 
 //Console.WriteLine("List of Sprints in the Project:");
 //foreach (var sprint in project.GetSprints()) {
-////    sprint.EndSprint();
+//    //    sprint.EndSprint();
 //    sprint.StartSprint();
 //    sprint.EndSprint();
 //}
@@ -73,6 +73,6 @@
 //context.HandleDone();
 
 //// Trying to perform invalid state transition
-//context.HandleTesting();
+////context.HandleTesting();
 
 

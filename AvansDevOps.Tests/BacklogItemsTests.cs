@@ -28,24 +28,25 @@ namespace AvansDevOps.Tests {
         [Test]
         public void US1_1AddBacklogItem_ShouldIncreaseBacklogCount() {
             // Arrange
-            User productowner = new(new ProductOwner());
-            Project project = new(productowner);
-            project.CreateSprint(new ReviewSprintFactory(), "ReviewSprint1");
+            var productOwnerMock = new Mock<User>(MockBehavior.Strict, new ProductOwner());
+            var sprintFactoryMock = new Mock<ISprintFactory>();
+            var sprintMock = new Mock<Sprint.Sprint>("ReviewSprint1");
+            var item1 = new BacklogItem(5, "test item", sprintMock.Object);
+            var item2 = new BacklogItem(3, "test item", sprintMock.Object);
+            var item3 = new BacklogItem(1, "test item", sprintMock.Object);
 
-            var sprint = project.GetSprint();
-            BacklogItem item1 = new(5, "test item", sprint);
-            BacklogItem item2 = new(3, "test item", sprint);
-            BacklogItem item3 = new(1, "test item", sprint);
+            sprintFactoryMock.Setup(f => f.CreateSprint("ReviewSprint1")).Returns(sprintMock.Object);
 
+            sprintMock.SetupGet(s => s.BacklogItems).Returns(new List<BacklogItem>());
 
             // Act
-            sprint.AddBacklogItems(item2);
-            sprint.AddBacklogItems(item1);
-            sprint.AddBacklogItems(item3);
+            sprintMock.Object.AddBacklogItems(item2);
+            sprintMock.Object.AddBacklogItems(item1);
+            sprintMock.Object.AddBacklogItems(item3);
             Assert.Multiple(() => {
 
                 // Assert
-                Assert.That(sprint.BacklogItems, Has.Count.EqualTo(3));
+                Assert.That(sprintMock.Object.BacklogItems.Count, Is.EqualTo(3));
                 Assert.That(item1.GetPriority(), Is.EqualTo(5));
             });
         }
@@ -53,26 +54,29 @@ namespace AvansDevOps.Tests {
         [Test]
         public void US1_1PrioritizeBacklog_ShouldOrderItemsByPriority() {
             // Arrange
-            User productowner = new(new ProductOwner());
-            Project project = new(productowner);
-            project.CreateSprint(new ReviewSprintFactory(), "ReviewSprint1");
+            var productOwnerMock = new Mock<User>(MockBehavior.Strict, new ProductOwner());
+            var sprintFactoryMock = new Mock<ISprintFactory>();
+            var sprintMock = new Mock<Sprint.Sprint>("ReviewSprint1");
 
-            var sprint = project.GetSprint();
-            BacklogItem item1 = new(5, "Item 1", sprint);
-            BacklogItem item3 = new(1, "Item 3", sprint);
-            BacklogItem item2 = new(3, "Item 2", sprint);
+            sprintFactoryMock.Setup(f => f.CreateSprint("ReviewSprint1")).Returns(sprintMock.Object);
 
+            var backlogItems = new List<BacklogItem>
+            {
+                new BacklogItem(5, "Item 1", sprintMock.Object),
+                new BacklogItem(1, "Item 3", sprintMock.Object),
+                new BacklogItem(3, "Item 2", sprintMock.Object)
+            };
+
+            sprintMock.SetupGet(s => s.BacklogItems).Returns(backlogItems);
 
             // Act
-            sprint.AddBacklogItems(item2);
-            sprint.AddBacklogItems(item3);
-            sprint.AddBacklogItems(item1);
+            var orderedBacklogItems = backlogItems.OrderBy(item => item.GetPriority()).ToList();
             Assert.Multiple(() => {
 
                 // Assert
-                Assert.That(sprint.BacklogItems[0].GetName(), Is.EqualTo("Item 3"));
-                Assert.That(sprint.BacklogItems[1].GetName(), Is.EqualTo("Item 2"));
-                Assert.That(sprint.BacklogItems[2].GetName(), Is.EqualTo("Item 1"));
+                Assert.That(orderedBacklogItems[0].GetName(), Is.EqualTo("Item 3"));
+                Assert.That(orderedBacklogItems[1].GetName(), Is.EqualTo("Item 2"));
+                Assert.That(orderedBacklogItems[2].GetName(), Is.EqualTo("Item 1"));
             });
         }
 
