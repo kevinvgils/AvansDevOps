@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace AvansDevOps.ScrumRole {
     public class Scrummaster : IScrumRole {
         public void execute() {
-            throw new NotImplementedException();
+            Console.WriteLine("Doing Scrummaster Tasks");
         }
     }
 }
