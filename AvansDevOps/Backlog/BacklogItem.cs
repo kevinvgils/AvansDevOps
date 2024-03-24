@@ -27,6 +27,9 @@ namespace AvansDevOps.Backlog {
         public void SetState(BacklogState state) {
             _state = state;
         }
+        public BacklogState GetState() {
+            return _state;
+        }
 
         public void SetPriority(int priority) {
             if (priority < 0) Priority = priority;

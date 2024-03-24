@@ -29,7 +29,7 @@ namespace AvansDevOps.Backlog {
 
         public override void HandleTested(BacklogItem context) {
             Console.WriteLine("Moving to Tested");
-            context.SetState(new TestingItem());
+            context.SetState(new TestedItem());
         }
 
         public override void HandleTesting(BacklogItem context) {
